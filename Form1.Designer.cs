@@ -1,4 +1,4 @@
-﻿namespace CardGame
+﻿namespace BlackJack_Game
 {
     partial class Form1
     {

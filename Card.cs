@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CardGame
+﻿namespace BlackJack_Game
 {
     public class Card
     {
@@ -28,9 +22,9 @@ namespace CardGame
         // Suprascrierea metodei ToString pentru a returna o reprezentare text a cărții
         public override string ToString()
         {
-            return $"{Rank} of {Suit}"; // Ex: "Ace of Hearts"
+            string card = Rank.ToString() + " of " + Suit.ToString(); // Ex: "Ace of Hearts" --- mai adaugi aici ce mai vrei sa afisezi
+
+            return card;
         }
     }
-
-
 }

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CardGame
+namespace BlackJack_Game
 {
     public class Game
     {
@@ -65,6 +61,5 @@ namespace CardGame
                 Console.WriteLine("It's a tie!");
         }
     }
-
 }
 
