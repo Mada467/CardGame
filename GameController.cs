@@ -11,7 +11,7 @@ namespace CardGame
 {
     public class GameController
     {
-
+        //Asta este varianta mea de proiect
         private Deck deck;
         private Player player;
         private Dealer dealer;
