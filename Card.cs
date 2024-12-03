@@ -5,32 +5,32 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CardGame
-{ 
+{
     public class Card
     {
-        // Suit - reprezintă culoarea (Hearts, Diamonds, etc.)
+        // Suit-ul (culoarea) cărții, ex: "Hearts", "Diamonds"
         public string Suit { get; private set; }
 
-        // Value - reprezintă valoarea (2, 3, King, Ace, etc.)
-        public string Value { get; private set; }
+        // Rangul cărții, ex: "Ace", "King", "2"
+        public string Rank { get; private set; }
 
-        // Points - punctele asociate valorii cărții
-        public int Points { get; private set; }
+        // Valoarea cărții (utilizată pentru calcularea scorului)
+        public int Value { get; private set; }
 
-        // Constructor pentru inițializarea cărților
-        public Card(string suit, string value, int points)
+        // Constructor pentru a inițializa o carte cu Suit, Rank și Value
+        public Card(string suit, string rank, int value)
         {
             Suit = suit;
+            Rank = rank;
             Value = value;
-            Points = points;
         }
 
-        // Metodă pentru afișarea informațiilor despre carte
+        // Suprascrierea metodei ToString pentru a returna o reprezentare text a cărții
         public override string ToString()
         {
-            return Value.ToString() + " of " + Suit.ToString();//conversie din int in string
+            return $"{Rank} of {Suit}"; // Ex: "Ace of Hearts"
         }
-        
-        
     }
+
+
 }

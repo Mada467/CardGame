@@ -6,63 +6,67 @@ using System.Threading.Tasks;
 
 namespace CardGame
 {
+
+
     public class Player
     {
-        protected string Name { get; private set; } // Numele jucătorului
-        protected List<Card> Hand; // Lista cărților din mână
+        // Numele jucătorului (ex: "Player", "Dealer")
+        public string Name { get; private set; }
 
-        public List<Card> GetHand()
-        { 
-            return Hand;
-        }
+        // Lista de cărți din mână
+        protected List<Card> Hand = new List<Card>();
 
+        // Scorul jucătorului calculat din cărțile din mână
+        public int Score => CalculateScore();
 
-        // Constructor pentru inițializarea jucătorului
+        // Constructor pentru a inițializa jucătorul cu un nume
         public Player(string name)
         {
             Name = name;
-            Hand = new List<Card>();
         }
 
-        // Metodă virtuală pentru adăugarea unei cărți
+        // Adaugă o carte în mâna jucătorului
         public virtual void AddCard(Card card)
         {
-            Hand.Add(card); // Adaugă cartea în mână
-            Console.WriteLine($"{Name} received {card}");
+            Hand.Add(card);
         }
 
-        // Calculează scorul jucătorului
-        public int GetScore()
+        // Determină dacă jucătorul dorește să tragă o altă carte (poate fi suprascris)
+        public virtual bool WantsToDraw()
         {
-            int score = 0; // Totalul punctelor
-            int aceCount = 0; // Numărul de ași
+            return Score < 17; // De obicei, jucătorul trage dacă scorul este sub 17
+        }
 
+        // Calculează scorul total pe baza mâinii jucătorului
+        private int CalculateScore()
+        {
+            int score = 0;     // Scorul inițial
+            int aceCount = 0;  // Numărul de Ași din mână
+
+            // Adăugăm valoarea fiecărei cărți la scor
             foreach (var card in Hand)
             {
-                score += card.Points; // Adaugă punctele fiecărei cărți
-                if (card.Value == "Ace")
-                    aceCount++; // Contorizează așii
+                score += card.Value;
+
+                // Numărăm Așii pentru ajustarea ulterioară a scorului
+                if (card.Rank == "Ace") aceCount++;
             }
 
-            // Ajustează valoarea pentru așii care depășesc 21
+            // Dacă scorul depășește 21, reducem valoarea Așilor de la 11 la 1
             while (score > 21 && aceCount > 0)
             {
-                score -= 10; // Reduce valoarea unui as la 1
+                score -= 10; // Scădem 10 pentru fiecare As
                 aceCount--;
             }
 
-            return score;
+            return score; // Returnăm scorul calculat
         }
 
-        // Afișează cărțile din mână și scorul
-        public void ShowHand()
+        // Reprezentare text a mâinii și scorului
+        public override string ToString()
         {
-            Console.WriteLine($"{Name}'s hand:");
-            foreach (var card in Hand)
-            {
-                Console.WriteLine(card);
-            }
-            Console.WriteLine($"Score: {GetScore()}");
+            return $"{Name}: {string.Join(", ", Hand)} (Score: {Score})";
         }
     }
 }
+

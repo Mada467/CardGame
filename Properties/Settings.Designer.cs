@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CardGame.Properties
+namespace BlackJack_Game.Properties
 {
 
 

@@ -12,33 +12,19 @@ namespace CardGame
 {
     public partial class Form1 : Form
     {
-
-        GameController gameController;
+        private Game game; // Instanța jocului
 
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent(); // Inițializează componentele formularului
+            game = new Game();     // Creăm jocul
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        // Eveniment pentru butonul "Start Game"
+        private void btnStartGame_Click(object sender, EventArgs e)
         {
-
+            game.StartGame(); // Pornește jocul
         }
-
-        private void startGameBtn_Click(object sender, EventArgs e)
-        {
-            List<Card> cards = new List<Card>();
-
-            gameController = new GameController();
-
-            cards = gameController.StartGame();
-
-            for (int i = 0; i < cards.Count; i++)
-            {
-                playerCardsTextBox.AppendText(cards[i].ToString());
-            }  
-        }
-
-        
     }
 }
+

@@ -25,7 +25,7 @@ namespace CardGame
         public void RevealHand()
         {
             Console.WriteLine("Dealer reveals their hand:");
-            ShowHand();
+            //ShowHand();
         }
     }
 }
