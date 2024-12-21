@@ -1,8 +1,8 @@
-﻿using BlackJack_Game;
+﻿using BlackJack_Client;
 using System;
 using System.Windows.Forms;
 
-namespace BlackJack_Game
+namespace BlackJack_Client
 {
     internal static class Program
     {
@@ -14,7 +14,7 @@ namespace BlackJack_Game
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Client_Window());
         }
     }
 }

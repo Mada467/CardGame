@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlackJack_Game
+namespace BlackJack_Client
 {
     public class Game
     {

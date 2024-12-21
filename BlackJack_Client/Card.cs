@@ -1,4 +1,4 @@
-﻿namespace BlackJack_Game
+﻿namespace BlackJack_Client
 {
     public class Card
     {

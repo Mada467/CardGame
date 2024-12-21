@@ -1,4 +1,4 @@
-﻿namespace BlackJack_Game
+﻿namespace BlackJack_Client
 {
     using System;
     using System.Collections.Generic;
