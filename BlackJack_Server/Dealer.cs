@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlackJack_Client
+namespace BlackJack_Server
 {
     public class Dealer : Player
     {

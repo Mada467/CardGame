@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BlackJack_Client
+namespace BlackJack_Server
 {
     public class Player
     {
@@ -40,10 +40,28 @@ namespace BlackJack_Client
             // Adăugăm valoarea fiecărei cărți la scor
             foreach (var card in Hand)
             {
-                score += card.Value;
+                if (card.Rank > 10)
+                {
+                    score += 10;
+                }
+                else if (card.Rank == 1)
+                {
+                    if (score + 11 <= 21)
+                    {
+                        score += 11;
+                    }
+                    else
+                    {
+                        score += 1;
+                    }
+                }
+                else
+                {
+                    score += card.Rank;
+                }
 
                 // Numărăm Așii pentru ajustarea ulterioară a scorului
-                if (card.Rank == "Ace") aceCount++;
+                if (card.Rank == 1) aceCount++;
             }
 
             // Dacă scorul depășește 21, reducem valoarea Așilor de la 11 la 1

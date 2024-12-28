@@ -1,15 +1,20 @@
 ﻿using System;
+using System.Drawing;
+using System.IO;
+using System.Net.Sockets;
+using System.Threading;
+using System.Windows.Forms;
 
-namespace BlackJack_Client
+namespace BlackJack_Server
 {
-    public class Game
+    public class GameServer
     {
         private Deck deck;    // Pachetul de cărți
         private Player player; // Jucătorul
         private Dealer dealer; // Dealer-ul
 
         // Constructor pentru inițializarea jocului
-        public Game()
+        public GameServer()
         {
             deck = new Deck();         // Creăm un pachet nou
             player = new Player("Player"); // Inițializăm jucătorul
@@ -59,6 +64,13 @@ namespace BlackJack_Client
                 Console.WriteLine("Dealer wins!");
             else
                 Console.WriteLine("It's a tie!");
+        }
+
+        public Card DrawNewCard()
+        {
+            Card card = deck.DrawCard();
+            player.AddCard(card);
+            return card;
         }
     }
 }

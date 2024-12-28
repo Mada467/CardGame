@@ -1,8 +1,10 @@
-﻿namespace BlackJack_Client
-{
-    using System;
-    using System.Collections.Generic;
+﻿using BlackJack_Server.Properties;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
 
+namespace BlackJack_Server
+{
     public class Deck
     {
         // Lista care conține toate cărțile din pachet
@@ -11,24 +13,19 @@
         // Generator de numere aleatoare pentru amestecarea pachetului
         private Random random = new Random();
 
+        private int numberOfSuits = 4;
+
+        private int numberOfRanks = 13;
+
         // Constructor pentru inițializarea unui pachet complet de cărți
         public Deck()
         {
-            // Definirea suit-urilor (culorilor)
-            string[] suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
-
-            // Definirea rangurilor (valorilor nominale)
-            string[] ranks = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace" };
-
-            // Valoarea fiecărui rang în joc
-            int[] values = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11 };
-
             // Generăm toate combinațiile posibile de Suit, Rank și Value
-            for (int i = 0; i < suits.Length; i++)
+            for (int i = 1; i <= numberOfSuits; i++)
             {
-                for (int j = 0; j < ranks.Length; j++)
+                for (int j = 1; j <= numberOfRanks; j++)
                 {
-                    cards.Add(new Card(suits[i], ranks[j], values[j]));
+                    cards.Add(new Card(i, j));
                 }
             }
         }

@@ -1,15 +1,22 @@
 ﻿using System;
+using System.Drawing;
+using System.IO;
+using System.Net;
+using System.Net.Sockets;
+using System.Reflection.Emit;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace BlackJack_Client
 {
-    public class Game
+    public class GameClient
     {
         private Deck deck;    // Pachetul de cărți
         private Player player; // Jucătorul
         private Dealer dealer; // Dealer-ul
 
         // Constructor pentru inițializarea jocului
-        public Game()
+        public GameClient()
         {
             deck = new Deck();         // Creăm un pachet nou
             player = new Player("Player"); // Inițializăm jucătorul
@@ -46,6 +53,13 @@ namespace BlackJack_Client
 
             // Determinăm câștigătorul
             DetermineWinner();
+        }
+
+        public Card DrawNewCard()
+        {
+            Card card = deck.DrawCard();
+            player.AddCard(card);
+            return card;
         }
 
         // Verificăm cine a câștigat jocul

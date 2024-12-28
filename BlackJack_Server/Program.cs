@@ -1,8 +1,7 @@
-﻿using BlackJack_Client;
-using System;
+﻿using System;
 using System.Windows.Forms;
 
-namespace BlackJack_Client
+namespace BlackJack_Server
 {
     internal static class Program
     {

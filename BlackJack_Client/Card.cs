@@ -3,20 +3,16 @@
     public class Card
     {
         // Suit-ul (culoarea) cărții, ex: "Hearts", "Diamonds"
-        public string Suit { get; private set; }
+        public int Suit { get; private set; }
 
         // Rangul cărții, ex: "Ace", "King", "2"
-        public string Rank { get; private set; }
-
-        // Valoarea cărții (utilizată pentru calcularea scorului)
-        public int Value { get; private set; }
+        public int Rank { get; private set; }
 
         // Constructor pentru a inițializa o carte cu Suit, Rank și Value
-        public Card(string suit, string rank, int value)
+        public Card(int suit, int rank)
         {
             Suit = suit;
             Rank = rank;
-            Value = value;
         }
 
         // Suprascrierea metodei ToString pentru a returna o reprezentare text a cărții
