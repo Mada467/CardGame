@@ -55,7 +55,6 @@
     <Compile Include="Server_Window.Designer.cs">
       <DependentUpon>Server_Window.cs</DependentUpon>
     </Compile>
-    <Compile Include="GameServer.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -243,6 +242,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\cardSpadesQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

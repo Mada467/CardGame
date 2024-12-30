@@ -1,17 +1,17 @@
 ﻿using BlackJack_Server.Properties;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Net.Sockets;
 using System.Threading;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace BlackJack_Server
 {
     public partial class Server_Window : Form
     {
-        private GameServer game; // Instanța jocului
-
         public TcpListener server;
         public String dateServer;
         Thread t;
@@ -40,6 +40,10 @@ namespace BlackJack_Server
 
         private int playerCardCounter = 0;
         private int dealerCardCounter = 0;
+        private Deck deck;    // Pachetul de cărți
+        private Player player; // Jucătorul
+        private Dealer dealer; // Dealer-ul
+
 
         private PictureBox[] playerPictureBoxes = new PictureBox[3];
         private PictureBox[] dealerPictureBoxes = new PictureBox[3];
@@ -47,7 +51,10 @@ namespace BlackJack_Server
         public Server_Window()
         {
             InitializeComponent(); // Inițializează componentele formularului
-            game = new GameServer();     // Creăm jocul
+
+            deck = new Deck();         // Creăm un pachet nou
+            player = new Player(); // Inițializăm jucătorul
+            dealer = new Dealer();     // Inițializăm dealer-ul
 
             playerPictureBoxes[0] = playerFirstCardImg;
             playerPictureBoxes[1] = playerSecondCardImg;
@@ -64,25 +71,101 @@ namespace BlackJack_Server
             t.Start();
         }
 
-        // Eveniment pentru butonul "Start Game"
-        private void btnStartGame_Click(object sender, EventArgs e)
+        // Calculează scorul total pe baza mâinii jucătorului
+        public int CalculateScore(object obj)
         {
-            game.StartGame(); // Pornește jocul
+            int score = 0;     // Scorul inițial
+            int aceCount = 0;  // Numărul de Ași din mână
+            List<Card> hand = new List<Card>();
+
+            if (obj is Player)
+            {
+                hand = player.GetPlayerHand();
+            }
+            else if (obj is Dealer)
+            {
+                hand = dealer.GetPlayerHand();
+            }
+
+            // Adăugăm valoarea fiecărei cărți la scor
+            foreach (var card in hand)
+            {
+                if (card.Rank > 10)
+                {
+                    score += 10;
+                }
+                else if (card.Rank == 1)
+                {
+                    if (score + 11 <= 21)
+                    {
+                        score += 11;
+                    }
+                    else
+                    {
+                        score += 1;
+                    }
+                }
+                else
+                {
+                    score += card.Rank;
+                }
+
+                // Numărăm Așii pentru ajustarea ulterioară a scorului
+                if (card.Rank == 1) aceCount++;
+            }
+
+            // Dacă scorul depășește 21, reducem valoarea Așilor de la 11 la 1
+            while (score > 21 && aceCount > 0)
+            {
+                score -= 10; // Scădem 10 pentru fiecare As
+                aceCount--;
+            }
+
+            return score; // Returnăm scorul calculat
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        // Verificăm cine a câștigat jocul
+        private void DetermineWinner()
         {
-            Card card = game.DrawNewCard();
+            if (player.GetScore() > 21)
+                Console.WriteLine("Player busts! Dealer wins.");
+            else if (dealer.GetScore() > 21 || player.GetScore() > dealer.GetScore())
+                Console.WriteLine("Player wins!");
+            else if (dealer.GetScore() > player.GetScore())
+                Console.WriteLine("Dealer wins!");
+            else
+                Console.WriteLine("It's a tie!");
+        }
+
+        public Card DrawNewCard()
+        {
+            Card card = deck.DrawCard();
+            player.AddCard(card);
+            return card;
+        }
+
+        private void drawCard_Click(object sender, EventArgs e)
+        {
+            Card card = DrawNewCard();
             dealerPictureBoxes[dealerCardCounter].Image = images[card.Suit - 1, card.Rank - 1];
-            SendInstructions(card.Suit + " " + card.Rank);
+            SendInstructions(2 + " " + card.Suit + " " + card.Rank);
             dealerCardCounter++;
         }
 
         public void ExecuteInstructions(string dateClient)
         {
             string[] parts = dateClient.Split(' ');
-            playerPictureBoxes[playerCardCounter].Image = images[Convert.ToInt32(parts[0]) - 1, Convert.ToInt32(parts[1]) - 1];
-            playerCardCounter++;
+            if (Convert.ToInt32(parts[0]) == 0)
+            {
+                Card card = DrawNewCard();
+                playerPictureBoxes[playerCardCounter].Image = images[card.Suit - 1, card.Rank - 1];
+                SendInstructions(1 + " " + card.Suit + " " + card.Rank);
+                playerCardCounter++;
+            }
+            else
+            {
+
+            }
         }
 
         public void Asculta_Server()

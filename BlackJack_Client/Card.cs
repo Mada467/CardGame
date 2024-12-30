@@ -14,13 +14,5 @@
             Suit = suit;
             Rank = rank;
         }
-
-        // Suprascrierea metodei ToString pentru a returna o reprezentare text a cărții
-        public override string ToString()
-        {
-            string card = Rank.ToString() + " of " + Suit.ToString(); // Ex: "Ace of Hearts" --- mai adaugi aici ce mai vrei sa afisezi
-
-            return card;
-        }
     }
 }

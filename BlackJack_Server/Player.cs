@@ -4,80 +4,36 @@ namespace BlackJack_Server
 {
     public class Player
     {
-        // Numele jucătorului (ex: "Player", "Dealer")
-        public string Name { get; private set; }
-
         // Lista de cărți din mână
-        protected List<Card> Hand = new List<Card>();
+        protected List<Card> hand = new List<Card>();
 
-        // Scorul jucătorului calculat din cărțile din mână
-        public int Score => CalculateScore();
+        protected int score;
+
+        public void SetScore(int score)
+        {
+            this.score = score;
+        }
+
+        public int GetScore()
+        {
+            return score;
+        }
+
+        public List<Card> GetPlayerHand()
+        {
+            return hand;
+        }
 
         // Constructor pentru a inițializa jucătorul cu un nume
-        public Player(string name)
+        public Player()
         {
-            Name = name;
+            score = 0;
         }
 
         // Adaugă o carte în mâna jucătorului
         public virtual void AddCard(Card card)
         {
-            Hand.Add(card);
-        }
-
-        // Determină dacă jucătorul dorește să tragă o altă carte (poate fi suprascris)
-        public virtual bool WantsToDraw()
-        {
-            return Score < 17; // De obicei, jucătorul trage dacă scorul este sub 17
-        }
-
-        // Calculează scorul total pe baza mâinii jucătorului
-        private int CalculateScore()
-        {
-            int score = 0;     // Scorul inițial
-            int aceCount = 0;  // Numărul de Ași din mână
-
-            // Adăugăm valoarea fiecărei cărți la scor
-            foreach (var card in Hand)
-            {
-                if (card.Rank > 10)
-                {
-                    score += 10;
-                }
-                else if (card.Rank == 1)
-                {
-                    if (score + 11 <= 21)
-                    {
-                        score += 11;
-                    }
-                    else
-                    {
-                        score += 1;
-                    }
-                }
-                else
-                {
-                    score += card.Rank;
-                }
-
-                // Numărăm Așii pentru ajustarea ulterioară a scorului
-                if (card.Rank == 1) aceCount++;
-            }
-
-            // Dacă scorul depășește 21, reducem valoarea Așilor de la 11 la 1
-            while (score > 21 && aceCount > 0)
-            {
-                score -= 10; // Scădem 10 pentru fiecare As
-                aceCount--;
-            }
-
-            return score; // Returnăm scorul calculat
-        }
-
-        // Reprezentare text a mâinii și scorului
-        public override string ToString()
-        {
-            return $"{Name}: {string.Join(", ", Hand)} (Score: {Score})";
+            hand.Add(card);
         }
     }
 }
