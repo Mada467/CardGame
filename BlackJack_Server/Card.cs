@@ -8,7 +8,7 @@
         // Rangul cărții, ex: "Ace", "King", "2"
         public int Rank { get; private set; }
 
-        // Constructor pentru a inițializa o carte cu Suit, Rank și Value
+        // Constructor pentru a inițializa o carte cu Suit, Rank
         public Card(int suit, int rank)
         {
             Suit = suit;

@@ -101,7 +101,8 @@
             this.dealerThirdCardImg.BackColor = System.Drawing.Color.Transparent;
             this.dealerThirdCardImg.Location = new System.Drawing.Point(349, 12);
             this.dealerThirdCardImg.Name = "dealerThirdCardImg";
-            this.dealerThirdCardImg.Size = new System.Drawing.Size(140, 190);
+            this.dealerThirdCardImg.Size = new System.Drawing.Size(100, 135);
+            this.dealerThirdCardImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.dealerThirdCardImg.TabIndex = 10;
             this.dealerThirdCardImg.TabStop = false;
             // 
@@ -110,7 +111,8 @@
             this.dealerSecondCardImg.BackColor = System.Drawing.Color.Transparent;
             this.dealerSecondCardImg.Location = new System.Drawing.Point(181, 12);
             this.dealerSecondCardImg.Name = "dealerSecondCardImg";
-            this.dealerSecondCardImg.Size = new System.Drawing.Size(140, 190);
+            this.dealerSecondCardImg.Size = new System.Drawing.Size(100, 135);
+            this.dealerSecondCardImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.dealerSecondCardImg.TabIndex = 9;
             this.dealerSecondCardImg.TabStop = false;
             // 
@@ -119,7 +121,8 @@
             this.dealerFirstCardImg.BackColor = System.Drawing.Color.Transparent;
             this.dealerFirstCardImg.Location = new System.Drawing.Point(12, 12);
             this.dealerFirstCardImg.Name = "dealerFirstCardImg";
-            this.dealerFirstCardImg.Size = new System.Drawing.Size(140, 190);
+            this.dealerFirstCardImg.Size = new System.Drawing.Size(100, 135);
+            this.dealerFirstCardImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.dealerFirstCardImg.TabIndex = 8;
             this.dealerFirstCardImg.TabStop = false;
             // 
@@ -134,13 +137,13 @@
             // 
             // drawCardBtn
             // 
-            this.drawCardBtn.BackColor = System.Drawing.Color.Red;
+            this.drawCardBtn.BackColor = System.Drawing.Color.Silver;
             this.drawCardBtn.Location = new System.Drawing.Point(181, 402);
             this.drawCardBtn.Margin = new System.Windows.Forms.Padding(0);
             this.drawCardBtn.Name = "drawCardBtn";
             this.drawCardBtn.Size = new System.Drawing.Size(105, 39);
             this.drawCardBtn.TabIndex = 12;
-            this.drawCardBtn.Text = "Draw new card";
+            this.drawCardBtn.Text = "Magic button\r\n";
             this.drawCardBtn.UseVisualStyleBackColor = false;
             this.drawCardBtn.Click += new System.EventHandler(this.drawCard_Click);
             // 
@@ -167,7 +170,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::BlackJack_Client.Properties.Resources.table;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(808, 465);
             this.Controls.Add(this.dealerScoreLabel);
             this.Controls.Add(this.playerScoreLabel);
             this.Controls.Add(this.drawCardBtn);
