@@ -122,7 +122,7 @@ namespace BlackJack_Client
         }
 
         // Verificăm cine a câștigat jocul
-        private bool IsBusted()
+        private bool PlayerIsBusted()
         {
             bool status = false;
             if (player.GetScore() > 21)
@@ -134,7 +134,7 @@ namespace BlackJack_Client
             return status;
         }
 
-        private bool HasReachedMaxScore()
+        private bool PlayerHasReachedMaxScore()
         {
             bool status = false;
             if (player.GetScore() == 21)
@@ -169,6 +169,7 @@ namespace BlackJack_Client
                 statusMessage.Text = "YOU LOST!";
                 statusMessage.ForeColor = Color.Red;
             }
+            determineWinnerBtn.Enabled = false;
         }
 
         private void RevealDealerCard()
@@ -219,37 +220,44 @@ namespace BlackJack_Client
         {
             string[] parts = dateServer.Split(' ');
             Card card = new Card(Convert.ToInt32(parts[1]), Convert.ToInt32(parts[2]));
-            if (Convert.ToInt32(parts[0]) == 1) //primire carte pentru player
+            if (Convert.ToInt32(parts[0]) == 3)
             {
-                player.AddCard(card);
-                playerPictureBoxes[playerCardCounter].Image = images[Convert.ToInt32(parts[1]) - 1, Convert.ToInt32(parts[2]) - 1];
-                playerPictureBoxes[playerCardCounter].Visible = true;
-                playerPictureBoxes[playerCardCounter].BringToFront();
-                playerCardCounter++;
-                player.SetScore(CalculateScore(player));
-                playerScoreLabel.Text = "Score:" + player.GetScore();
+                DetermineWinner();
             }
-            else if (Convert.ToInt32(parts[0]) == 2) //primire carte pentru dealer
+            else
             {
-                dealer.AddCard(card);
-                if (dealer.GetIsCurrentCardHidden() == true)
+                if (Convert.ToInt32(parts[0]) == 1) //primire carte pentru player
                 {
-                    firstCardImage = images[card.Suit - 1, card.Rank - 1];
-                    dealerPictureBoxes[dealerCardCounter].Image = Resources.cardBack;
+                    player.AddCard(card);
+                    playerPictureBoxes[playerCardCounter].Image = images[Convert.ToInt32(parts[1]) - 1, Convert.ToInt32(parts[2]) - 1];
+                    playerPictureBoxes[playerCardCounter].Visible = true;
+                    playerPictureBoxes[playerCardCounter].BringToFront();
+                    playerCardCounter++;
+                    player.SetScore(CalculateScore(player));
+                    playerScoreLabel.Text = "Score:" + player.GetScore();
                 }
-                else
+                else if (Convert.ToInt32(parts[0]) == 2) //primire carte pentru dealer
                 {
-                    dealerPictureBoxes[dealerCardCounter].Image = images[card.Suit - 1, card.Rank - 1];
+                    dealer.AddCard(card);
+                    if (dealer.GetIsCurrentCardHidden() == true)
+                    {
+                        firstCardImage = images[card.Suit - 1, card.Rank - 1];
+                        dealerPictureBoxes[dealerCardCounter].Image = Resources.cardBack;
+                    }
+                    else
+                    {
+                        dealerPictureBoxes[dealerCardCounter].Image = images[card.Suit - 1, card.Rank - 1];
+                    }
+                    dealerPictureBoxes[dealerCardCounter].Visible = true;
+                    dealerPictureBoxes[dealerCardCounter].BringToFront();
+                    dealerCardCounter++;
+                    dealer.SetScore(CalculateScore(dealer));
+                    dealerScoreLabel.Text = "Score:" + dealer.GetScore();
                 }
-                dealerPictureBoxes[dealerCardCounter].Visible = true;
-                dealerPictureBoxes[dealerCardCounter].BringToFront();
-                dealerCardCounter++;
-                dealer.SetScore(CalculateScore(dealer));
-                dealerScoreLabel.Text = "Score:" + dealer.GetScore();
-            }
-            if (IsBusted() || HasReachedMaxScore())
-            {
-                determineWinnerBtn.Enabled = false;
+                if (PlayerIsBusted() || PlayerHasReachedMaxScore())
+                {
+                    determineWinnerBtn.Enabled = false;
+                }
             }
         }
 
@@ -301,6 +309,7 @@ namespace BlackJack_Client
         private void determineWinnerBtn_Click(object sender, EventArgs e)
         {
             DetermineWinner();
+            SendInstructions("3");
         }
     }
 }

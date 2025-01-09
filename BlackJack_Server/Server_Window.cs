@@ -129,7 +129,7 @@ namespace BlackJack_Server
 
         // Verificăm cine a câștigat jocul
         // Verificăm cine a câștigat jocul
-        private bool IsBusted()
+        private bool PlayerIsBusted()
         {
             bool status = false;
             if (player.GetScore() > 21)
@@ -141,7 +141,7 @@ namespace BlackJack_Server
             return status;
         }
 
-        private bool HasReachedMaxScore()
+        private bool PlayerHasReachedMaxScore()
         {
             bool status = false;
             if (player.GetScore() == 21)
@@ -176,6 +176,7 @@ namespace BlackJack_Server
                 statusMessage.Text = "YOU LOST!";
                 statusMessage.ForeColor = Color.Red;
             }
+            determineWinnerBtn.Enabled = false;
         }
 
         private void RevealDealerCard()
@@ -208,7 +209,7 @@ namespace BlackJack_Server
             dealerCardCounter++;
             dealer.SetScore(CalculateScore(dealer));
             dealerScoreLabel.Text = "Score:" + dealer.GetScore();
-            if (IsBusted() || HasReachedMaxScore())
+            if (PlayerIsBusted() || PlayerHasReachedMaxScore())
             {
                 determineWinnerBtn.Enabled = false;
             }
@@ -217,20 +218,27 @@ namespace BlackJack_Server
         public void ExecuteInstructions(string dateClient)
         {
             string[] parts = dateClient.Split(' ');
-            if (Convert.ToInt32(parts[0]) == 0)
+            if (Convert.ToInt32(parts[0]) == 3)
             {
-                Card card = DrawNewCard(player);
-                playerPictureBoxes[playerCardCounter].Image = images[card.Suit - 1, card.Rank - 1];
-                playerPictureBoxes[playerCardCounter].Visible = true;
-                playerPictureBoxes[playerCardCounter].BringToFront();
-                SendInstructions(1 + " " + card.Suit + " " + card.Rank);
-                playerCardCounter++;
-                player.SetScore(CalculateScore(player));
-                playerScoreLabel.Text = "Score:" + player.GetScore();
+                DetermineWinner();
             }
-            if (IsBusted() || HasReachedMaxScore())
+            else
             {
-                determineWinnerBtn.Enabled = false;
+                if (Convert.ToInt32(parts[0]) == 0)
+                {
+                    Card card = DrawNewCard(player);
+                    playerPictureBoxes[playerCardCounter].Image = images[card.Suit - 1, card.Rank - 1];
+                    playerPictureBoxes[playerCardCounter].Visible = true;
+                    playerPictureBoxes[playerCardCounter].BringToFront();
+                    SendInstructions(1 + " " + card.Suit + " " + card.Rank);
+                    playerCardCounter++;
+                    player.SetScore(CalculateScore(player));
+                    playerScoreLabel.Text = "Score:" + player.GetScore();
+                }
+                if (PlayerIsBusted() || PlayerHasReachedMaxScore())
+                {
+                    determineWinnerBtn.Enabled = false;
+                }
             }
         }
 
@@ -283,6 +291,7 @@ namespace BlackJack_Server
         private void determineWinnerBtn_Click(object sender, EventArgs e)
         {
             DetermineWinner();
+            SendInstructions("3");
         }
     }
 }
