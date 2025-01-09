@@ -28,81 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dealerThirdCardImg = new System.Windows.Forms.PictureBox();
-            this.dealerSecondCardImg = new System.Windows.Forms.PictureBox();
-            this.dealerFirstCardImg = new System.Windows.Forms.PictureBox();
-            this.playerThirdCardImg = new System.Windows.Forms.PictureBox();
-            this.playerSecondCardImg = new System.Windows.Forms.PictureBox();
-            this.playerFirstCardImg = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.drawCardBtn = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dealerThirdCardImg)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dealerSecondCardImg)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dealerFirstCardImg)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.playerThirdCardImg)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.playerSecondCardImg)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.playerFirstCardImg)).BeginInit();
+            this.determineWinnerBtn = new System.Windows.Forms.Button();
+            this.statusMessage = new System.Windows.Forms.Label();
+            this.dealerScoreLabel = new System.Windows.Forms.Label();
+            this.playerScoreLabel = new System.Windows.Forms.Label();
+            this.dealerCardImg5 = new System.Windows.Forms.PictureBox();
+            this.dealerCardImg4 = new System.Windows.Forms.PictureBox();
+            this.playerCardImg5 = new System.Windows.Forms.PictureBox();
+            this.playerCardImg4 = new System.Windows.Forms.PictureBox();
+            this.dealerCardImg3 = new System.Windows.Forms.PictureBox();
+            this.dealerCardImg2 = new System.Windows.Forms.PictureBox();
+            this.dealerCardImg1 = new System.Windows.Forms.PictureBox();
+            this.playerCardImg3 = new System.Windows.Forms.PictureBox();
+            this.playerCardImg2 = new System.Windows.Forms.PictureBox();
+            this.playerCardImg1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dealerCardImg5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dealerCardImg4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerCardImg5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerCardImg4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dealerCardImg3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dealerCardImg2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dealerCardImg1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerCardImg3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerCardImg2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerCardImg1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dealerThirdCardImg
-            // 
-            this.dealerThirdCardImg.BackColor = System.Drawing.Color.Transparent;
-            this.dealerThirdCardImg.Location = new System.Drawing.Point(345, 233);
-            this.dealerThirdCardImg.Name = "dealerThirdCardImg";
-            this.dealerThirdCardImg.Size = new System.Drawing.Size(100, 135);
-            this.dealerThirdCardImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.dealerThirdCardImg.TabIndex = 16;
-            this.dealerThirdCardImg.TabStop = false;
-            // 
-            // dealerSecondCardImg
-            // 
-            this.dealerSecondCardImg.BackColor = System.Drawing.Color.Transparent;
-            this.dealerSecondCardImg.Location = new System.Drawing.Point(207, 233);
-            this.dealerSecondCardImg.Name = "dealerSecondCardImg";
-            this.dealerSecondCardImg.Size = new System.Drawing.Size(100, 135);
-            this.dealerSecondCardImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.dealerSecondCardImg.TabIndex = 15;
-            this.dealerSecondCardImg.TabStop = false;
-            // 
-            // dealerFirstCardImg
-            // 
-            this.dealerFirstCardImg.BackColor = System.Drawing.Color.Transparent;
-            this.dealerFirstCardImg.Location = new System.Drawing.Point(58, 233);
-            this.dealerFirstCardImg.Name = "dealerFirstCardImg";
-            this.dealerFirstCardImg.Size = new System.Drawing.Size(100, 135);
-            this.dealerFirstCardImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.dealerFirstCardImg.TabIndex = 14;
-            this.dealerFirstCardImg.TabStop = false;
-            // 
-            // playerThirdCardImg
-            // 
-            this.playerThirdCardImg.BackColor = System.Drawing.Color.Transparent;
-            this.playerThirdCardImg.Location = new System.Drawing.Point(345, 35);
-            this.playerThirdCardImg.Name = "playerThirdCardImg";
-            this.playerThirdCardImg.Size = new System.Drawing.Size(100, 135);
-            this.playerThirdCardImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.playerThirdCardImg.TabIndex = 13;
-            this.playerThirdCardImg.TabStop = false;
-            // 
-            // playerSecondCardImg
-            // 
-            this.playerSecondCardImg.BackColor = System.Drawing.Color.Transparent;
-            this.playerSecondCardImg.Location = new System.Drawing.Point(207, 35);
-            this.playerSecondCardImg.Name = "playerSecondCardImg";
-            this.playerSecondCardImg.Size = new System.Drawing.Size(100, 135);
-            this.playerSecondCardImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.playerSecondCardImg.TabIndex = 12;
-            this.playerSecondCardImg.TabStop = false;
-            // 
-            // playerFirstCardImg
-            // 
-            this.playerFirstCardImg.BackColor = System.Drawing.Color.Transparent;
-            this.playerFirstCardImg.Location = new System.Drawing.Point(58, 35);
-            this.playerFirstCardImg.Name = "playerFirstCardImg";
-            this.playerFirstCardImg.Size = new System.Drawing.Size(100, 135);
-            this.playerFirstCardImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.playerFirstCardImg.TabIndex = 11;
-            this.playerFirstCardImg.TabStop = false;
             // 
             // label1
             // 
@@ -124,42 +76,199 @@
             this.drawCardBtn.UseVisualStyleBackColor = false;
             this.drawCardBtn.Click += new System.EventHandler(this.drawCard_Click);
             // 
+            // determineWinnerBtn
+            // 
+            this.determineWinnerBtn.Location = new System.Drawing.Point(696, 407);
+            this.determineWinnerBtn.Name = "determineWinnerBtn";
+            this.determineWinnerBtn.Size = new System.Drawing.Size(100, 46);
+            this.determineWinnerBtn.TabIndex = 19;
+            this.determineWinnerBtn.Text = "Determine winner";
+            this.determineWinnerBtn.UseVisualStyleBackColor = true;
+            this.determineWinnerBtn.Click += new System.EventHandler(this.determineWinnerBtn_Click);
+            // 
+            // statusMessage
+            // 
+            this.statusMessage.AutoSize = true;
+            this.statusMessage.Location = new System.Drawing.Point(707, 71);
+            this.statusMessage.Name = "statusMessage";
+            this.statusMessage.Size = new System.Drawing.Size(47, 16);
+            this.statusMessage.TabIndex = 20;
+            this.statusMessage.Text = "Status:";
+            // 
+            // dealerScoreLabel
+            // 
+            this.dealerScoreLabel.AutoSize = true;
+            this.dealerScoreLabel.Location = new System.Drawing.Point(616, 396);
+            this.dealerScoreLabel.Name = "dealerScoreLabel";
+            this.dealerScoreLabel.Size = new System.Drawing.Size(46, 16);
+            this.dealerScoreLabel.TabIndex = 22;
+            this.dealerScoreLabel.Text = "Score:";
+            // 
+            // playerScoreLabel
+            // 
+            this.playerScoreLabel.AutoSize = true;
+            this.playerScoreLabel.Location = new System.Drawing.Point(616, 35);
+            this.playerScoreLabel.Name = "playerScoreLabel";
+            this.playerScoreLabel.Size = new System.Drawing.Size(46, 16);
+            this.playerScoreLabel.TabIndex = 21;
+            this.playerScoreLabel.Text = "Score:";
+            // 
+            // dealerCardImg5
+            // 
+            this.dealerCardImg5.BackColor = System.Drawing.Color.Transparent;
+            this.dealerCardImg5.Location = new System.Drawing.Point(261, 248);
+            this.dealerCardImg5.Name = "dealerCardImg5";
+            this.dealerCardImg5.Size = new System.Drawing.Size(100, 135);
+            this.dealerCardImg5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.dealerCardImg5.TabIndex = 32;
+            this.dealerCardImg5.TabStop = false;
+            // 
+            // dealerCardImg4
+            // 
+            this.dealerCardImg4.BackColor = System.Drawing.Color.Transparent;
+            this.dealerCardImg4.Location = new System.Drawing.Point(207, 248);
+            this.dealerCardImg4.Name = "dealerCardImg4";
+            this.dealerCardImg4.Size = new System.Drawing.Size(100, 135);
+            this.dealerCardImg4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.dealerCardImg4.TabIndex = 31;
+            this.dealerCardImg4.TabStop = false;
+            // 
+            // playerCardImg5
+            // 
+            this.playerCardImg5.BackColor = System.Drawing.Color.Transparent;
+            this.playerCardImg5.Location = new System.Drawing.Point(261, 43);
+            this.playerCardImg5.Name = "playerCardImg5";
+            this.playerCardImg5.Size = new System.Drawing.Size(100, 135);
+            this.playerCardImg5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.playerCardImg5.TabIndex = 30;
+            this.playerCardImg5.TabStop = false;
+            // 
+            // playerCardImg4
+            // 
+            this.playerCardImg4.BackColor = System.Drawing.Color.Transparent;
+            this.playerCardImg4.Location = new System.Drawing.Point(207, 43);
+            this.playerCardImg4.Name = "playerCardImg4";
+            this.playerCardImg4.Size = new System.Drawing.Size(100, 135);
+            this.playerCardImg4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.playerCardImg4.TabIndex = 29;
+            this.playerCardImg4.TabStop = false;
+            // 
+            // dealerCardImg3
+            // 
+            this.dealerCardImg3.BackColor = System.Drawing.Color.Transparent;
+            this.dealerCardImg3.Location = new System.Drawing.Point(148, 248);
+            this.dealerCardImg3.Name = "dealerCardImg3";
+            this.dealerCardImg3.Size = new System.Drawing.Size(100, 135);
+            this.dealerCardImg3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.dealerCardImg3.TabIndex = 28;
+            this.dealerCardImg3.TabStop = false;
+            // 
+            // dealerCardImg2
+            // 
+            this.dealerCardImg2.BackColor = System.Drawing.Color.Transparent;
+            this.dealerCardImg2.Location = new System.Drawing.Point(94, 248);
+            this.dealerCardImg2.Name = "dealerCardImg2";
+            this.dealerCardImg2.Size = new System.Drawing.Size(100, 135);
+            this.dealerCardImg2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.dealerCardImg2.TabIndex = 27;
+            this.dealerCardImg2.TabStop = false;
+            // 
+            // dealerCardImg1
+            // 
+            this.dealerCardImg1.BackColor = System.Drawing.Color.Transparent;
+            this.dealerCardImg1.Location = new System.Drawing.Point(33, 248);
+            this.dealerCardImg1.Name = "dealerCardImg1";
+            this.dealerCardImg1.Size = new System.Drawing.Size(100, 135);
+            this.dealerCardImg1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.dealerCardImg1.TabIndex = 26;
+            this.dealerCardImg1.TabStop = false;
+            // 
+            // playerCardImg3
+            // 
+            this.playerCardImg3.BackColor = System.Drawing.Color.Transparent;
+            this.playerCardImg3.Location = new System.Drawing.Point(148, 43);
+            this.playerCardImg3.Name = "playerCardImg3";
+            this.playerCardImg3.Size = new System.Drawing.Size(100, 135);
+            this.playerCardImg3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.playerCardImg3.TabIndex = 25;
+            this.playerCardImg3.TabStop = false;
+            // 
+            // playerCardImg2
+            // 
+            this.playerCardImg2.BackColor = System.Drawing.Color.Transparent;
+            this.playerCardImg2.Location = new System.Drawing.Point(94, 43);
+            this.playerCardImg2.Name = "playerCardImg2";
+            this.playerCardImg2.Size = new System.Drawing.Size(100, 135);
+            this.playerCardImg2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.playerCardImg2.TabIndex = 24;
+            this.playerCardImg2.TabStop = false;
+            // 
+            // playerCardImg1
+            // 
+            this.playerCardImg1.BackColor = System.Drawing.Color.Transparent;
+            this.playerCardImg1.Location = new System.Drawing.Point(33, 43);
+            this.playerCardImg1.Name = "playerCardImg1";
+            this.playerCardImg1.Size = new System.Drawing.Size(100, 135);
+            this.playerCardImg1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.playerCardImg1.TabIndex = 23;
+            this.playerCardImg1.TabStop = false;
+            // 
             // Server_Window
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::BlackJack_Server.Properties.Resources.table;
             this.ClientSize = new System.Drawing.Size(808, 465);
+            this.Controls.Add(this.dealerCardImg5);
+            this.Controls.Add(this.dealerCardImg4);
+            this.Controls.Add(this.playerCardImg5);
+            this.Controls.Add(this.playerCardImg4);
+            this.Controls.Add(this.dealerCardImg3);
+            this.Controls.Add(this.dealerCardImg2);
+            this.Controls.Add(this.dealerCardImg1);
+            this.Controls.Add(this.playerCardImg3);
+            this.Controls.Add(this.playerCardImg2);
+            this.Controls.Add(this.playerCardImg1);
+            this.Controls.Add(this.dealerScoreLabel);
+            this.Controls.Add(this.playerScoreLabel);
+            this.Controls.Add(this.statusMessage);
+            this.Controls.Add(this.determineWinnerBtn);
             this.Controls.Add(this.drawCardBtn);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dealerThirdCardImg);
-            this.Controls.Add(this.dealerSecondCardImg);
-            this.Controls.Add(this.dealerFirstCardImg);
-            this.Controls.Add(this.playerThirdCardImg);
-            this.Controls.Add(this.playerSecondCardImg);
-            this.Controls.Add(this.playerFirstCardImg);
             this.Name = "Server_Window";
             this.Text = "BlackJack Server";
-            ((System.ComponentModel.ISupportInitialize)(this.dealerThirdCardImg)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dealerSecondCardImg)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dealerFirstCardImg)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.playerThirdCardImg)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.playerSecondCardImg)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.playerFirstCardImg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dealerCardImg5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dealerCardImg4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerCardImg5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerCardImg4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dealerCardImg3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dealerCardImg2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dealerCardImg1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerCardImg3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerCardImg2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerCardImg1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.PictureBox dealerThirdCardImg;
-        private System.Windows.Forms.PictureBox dealerSecondCardImg;
-        private System.Windows.Forms.PictureBox dealerFirstCardImg;
-        private System.Windows.Forms.PictureBox playerThirdCardImg;
-        private System.Windows.Forms.PictureBox playerSecondCardImg;
-        private System.Windows.Forms.PictureBox playerFirstCardImg;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button drawCardBtn;
+        private System.Windows.Forms.Button determineWinnerBtn;
+        private System.Windows.Forms.Label statusMessage;
+        private System.Windows.Forms.Label dealerScoreLabel;
+        private System.Windows.Forms.Label playerScoreLabel;
+        private System.Windows.Forms.PictureBox dealerCardImg5;
+        private System.Windows.Forms.PictureBox dealerCardImg4;
+        private System.Windows.Forms.PictureBox playerCardImg5;
+        private System.Windows.Forms.PictureBox playerCardImg4;
+        private System.Windows.Forms.PictureBox dealerCardImg3;
+        private System.Windows.Forms.PictureBox dealerCardImg2;
+        private System.Windows.Forms.PictureBox dealerCardImg1;
+        private System.Windows.Forms.PictureBox playerCardImg3;
+        private System.Windows.Forms.PictureBox playerCardImg2;
+        private System.Windows.Forms.PictureBox playerCardImg1;
     }
 }
 

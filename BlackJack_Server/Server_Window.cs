@@ -6,6 +6,7 @@ using System.IO;
 using System.Net.Sockets;
 using System.Threading;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace BlackJack_Server
@@ -45,8 +46,10 @@ namespace BlackJack_Server
         private Dealer dealer; // Dealer-ul
 
 
-        private PictureBox[] playerPictureBoxes = new PictureBox[3];
-        private PictureBox[] dealerPictureBoxes = new PictureBox[3];
+        private PictureBox[] playerPictureBoxes = new PictureBox[5];
+        private PictureBox[] dealerPictureBoxes = new PictureBox[5];
+
+        private Image firstCardImage = null;
 
         public Server_Window()
         {
@@ -56,12 +59,22 @@ namespace BlackJack_Server
             player = new Player(); // Inițializăm jucătorul
             dealer = new Dealer();     // Inițializăm dealer-ul
 
-            playerPictureBoxes[0] = playerFirstCardImg;
-            playerPictureBoxes[1] = playerSecondCardImg;
-            playerPictureBoxes[2] = playerThirdCardImg;
-            dealerPictureBoxes[0] = dealerFirstCardImg;
-            dealerPictureBoxes[1] = dealerSecondCardImg;
-            dealerPictureBoxes[2] = dealerThirdCardImg;
+            playerPictureBoxes[0] = playerCardImg1;
+            playerPictureBoxes[1] = playerCardImg2;
+            playerPictureBoxes[2] = playerCardImg3;
+            playerPictureBoxes[3] = playerCardImg4;
+            playerPictureBoxes[4] = playerCardImg5;
+            dealerPictureBoxes[0] = dealerCardImg1;
+            dealerPictureBoxes[1] = dealerCardImg2;
+            dealerPictureBoxes[2] = dealerCardImg3;
+            dealerPictureBoxes[3] = dealerCardImg4;
+            dealerPictureBoxes[4] = dealerCardImg5;
+
+            for (int i = 0; i < 5; i++)
+            {
+                playerPictureBoxes[i].Visible = false;
+                dealerPictureBoxes[i].Visible = false;
+            }
 
             server = new TcpListener(System.Net.IPAddress.Any, 8098);
             server.Start();
@@ -72,23 +85,13 @@ namespace BlackJack_Server
         }
 
         // Calculează scorul total pe baza mâinii jucătorului
-        public int CalculateScore(object obj)
+        public int CalculateScore(Player player)
         {
             int score = 0;     // Scorul inițial
             int aceCount = 0;  // Numărul de Ași din mână
-            List<Card> hand = new List<Card>();
-
-            if (obj is Player)
-            {
-                hand = player.GetPlayerHand();
-            }
-            else if (obj is Dealer)
-            {
-                hand = dealer.GetPlayerHand();
-            }
 
             // Adăugăm valoarea fiecărei cărți la scor
-            foreach (var card in hand)
+            foreach (var card in player.GetPlayerHand())
             {
                 if (card.Rank > 10)
                 {
@@ -125,19 +128,62 @@ namespace BlackJack_Server
         }
 
         // Verificăm cine a câștigat jocul
-        private void DetermineWinner()
+        // Verificăm cine a câștigat jocul
+        private bool IsBusted()
         {
+            bool status = false;
             if (player.GetScore() > 21)
-                Console.WriteLine("Player busts! Dealer wins.");
-            else if (dealer.GetScore() > 21 || player.GetScore() > dealer.GetScore())
-                Console.WriteLine("Player wins!");
-            else if (dealer.GetScore() > player.GetScore())
-                Console.WriteLine("Dealer wins!");
-            else
-                Console.WriteLine("It's a tie!");
+            {
+                statusMessage.Text = "YOU WON!";
+                statusMessage.ForeColor = Color.Black;
+                status = true;
+            }
+            return status;
         }
 
-        public Card DrawNewCard()
+        private bool HasReachedMaxScore()
+        {
+            bool status = false;
+            if (player.GetScore() == 21)
+            {
+                statusMessage.Text = "YOU LOST!"; 
+                statusMessage.ForeColor = Color.Black;
+                status = true;
+            }
+            return status;
+        }
+
+        private void DetermineWinner()
+        {
+            RevealDealerCard();
+            if (dealer.GetScore() == 21)
+            {
+                statusMessage.Text = "YOU WON!";
+                statusMessage.ForeColor = Color.Red;
+            }
+            if (dealer.GetScore() > 21)
+            {
+                statusMessage.Text = "BUSTED!";
+                statusMessage.ForeColor = Color.Red;
+            }
+            if (dealer.GetScore() > player.GetScore())
+            {
+                statusMessage.Text = "YOU WON!";
+                statusMessage.ForeColor = Color.Black;
+            }
+            else
+            {
+                statusMessage.Text = "YOU LOST!";
+                statusMessage.ForeColor = Color.Red;
+            }
+        }
+
+        private void RevealDealerCard()
+        {
+            dealerPictureBoxes[0].Image = firstCardImage;
+        }
+
+        public Card DrawNewCard(Player player)
         {
             Card card = deck.DrawCard();
             player.AddCard(card);
@@ -146,10 +192,26 @@ namespace BlackJack_Server
 
         private void drawCard_Click(object sender, EventArgs e)
         {
-            Card card = DrawNewCard();
-            dealerPictureBoxes[dealerCardCounter].Image = images[card.Suit - 1, card.Rank - 1];
+            Card card = DrawNewCard(dealer);
+            if (dealer.GetIsCurrentCardHidden() == true)
+            {
+                firstCardImage = images[card.Suit - 1, card.Rank - 1];
+                dealerPictureBoxes[dealerCardCounter].Image = Resources.cardBack;
+            }
+            else
+            {
+                dealerPictureBoxes[dealerCardCounter].Image = images[card.Suit - 1, card.Rank - 1];
+            }
+            dealerPictureBoxes[dealerCardCounter].Visible = true;
+            dealerPictureBoxes[dealerCardCounter].BringToFront();
             SendInstructions(2 + " " + card.Suit + " " + card.Rank);
             dealerCardCounter++;
+            dealer.SetScore(CalculateScore(dealer));
+            dealerScoreLabel.Text = "Score:" + dealer.GetScore();
+            if (IsBusted() || HasReachedMaxScore())
+            {
+                determineWinnerBtn.Enabled = false;
+            }
         }
 
         public void ExecuteInstructions(string dateClient)
@@ -157,20 +219,23 @@ namespace BlackJack_Server
             string[] parts = dateClient.Split(' ');
             if (Convert.ToInt32(parts[0]) == 0)
             {
-                Card card = DrawNewCard();
+                Card card = DrawNewCard(player);
                 playerPictureBoxes[playerCardCounter].Image = images[card.Suit - 1, card.Rank - 1];
+                playerPictureBoxes[playerCardCounter].Visible = true;
+                playerPictureBoxes[playerCardCounter].BringToFront();
                 SendInstructions(1 + " " + card.Suit + " " + card.Rank);
                 playerCardCounter++;
+                player.SetScore(CalculateScore(player));
+                playerScoreLabel.Text = "Score:" + player.GetScore();
             }
-            else
+            if (IsBusted() || HasReachedMaxScore())
             {
-
+                determineWinnerBtn.Enabled = false;
             }
         }
 
         public void Asculta_Server()
         {
-
             while (workThread)
             {
                 Socket socketServer = server.AcceptSocket();
@@ -199,7 +264,6 @@ namespace BlackJack_Server
                 }
                 socketServer.Close();
             }
-
         }
 
         private void SendInstructions(string serverInstructions)
@@ -214,6 +278,11 @@ namespace BlackJack_Server
             {
 
             }
+        }
+
+        private void determineWinnerBtn_Click(object sender, EventArgs e)
+        {
+            DetermineWinner();
         }
     }
 }
