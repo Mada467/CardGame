@@ -38,8 +38,6 @@
             this.dealerCardImg1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.drawCardBtn = new System.Windows.Forms.Button();
-            this.playerScoreLabel = new System.Windows.Forms.Label();
-            this.dealerScoreLabel = new System.Windows.Forms.Label();
             this.determineWinnerBtn = new System.Windows.Forms.Button();
             this.statusMessage = new System.Windows.Forms.Label();
             this.dealerCardImg5 = new System.Windows.Forms.PictureBox();
@@ -157,24 +155,6 @@
             this.drawCardBtn.UseVisualStyleBackColor = false;
             this.drawCardBtn.Click += new System.EventHandler(this.drawCard_Click);
             // 
-            // playerScoreLabel
-            // 
-            this.playerScoreLabel.AutoSize = true;
-            this.playerScoreLabel.Location = new System.Drawing.Point(563, 367);
-            this.playerScoreLabel.Name = "playerScoreLabel";
-            this.playerScoreLabel.Size = new System.Drawing.Size(46, 16);
-            this.playerScoreLabel.TabIndex = 13;
-            this.playerScoreLabel.Text = "Score:";
-            // 
-            // dealerScoreLabel
-            // 
-            this.dealerScoreLabel.AutoSize = true;
-            this.dealerScoreLabel.Location = new System.Drawing.Point(563, 41);
-            this.dealerScoreLabel.Name = "dealerScoreLabel";
-            this.dealerScoreLabel.Size = new System.Drawing.Size(46, 16);
-            this.dealerScoreLabel.TabIndex = 14;
-            this.dealerScoreLabel.Text = "Score:";
-            // 
             // determineWinnerBtn
             // 
             this.determineWinnerBtn.Location = new System.Drawing.Point(661, 346);
@@ -246,8 +226,6 @@
             this.Controls.Add(this.playerCardImg4);
             this.Controls.Add(this.statusMessage);
             this.Controls.Add(this.determineWinnerBtn);
-            this.Controls.Add(this.dealerScoreLabel);
-            this.Controls.Add(this.playerScoreLabel);
             this.Controls.Add(this.drawCardBtn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dealerCardImg3);
@@ -260,7 +238,6 @@
             this.Controls.Add(this.connect_Btn);
             this.Name = "Client_Window";
             this.Text = "BlackJack Client";
-            this.Load += new System.EventHandler(this.Client_Window_Load);
             ((System.ComponentModel.ISupportInitialize)(this.playerCardImg1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.playerCardImg2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.playerCardImg3)).EndInit();
@@ -287,8 +264,6 @@
         private System.Windows.Forms.PictureBox dealerCardImg1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button drawCardBtn;
-        private System.Windows.Forms.Label playerScoreLabel;
-        private System.Windows.Forms.Label dealerScoreLabel;
         private System.Windows.Forms.Button determineWinnerBtn;
         private System.Windows.Forms.Label statusMessage;
         private System.Windows.Forms.PictureBox dealerCardImg5;

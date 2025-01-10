@@ -128,7 +128,6 @@ namespace BlackJack_Server
         }
 
         // Verificăm cine a câștigat jocul
-        // Verificăm cine a câștigat jocul
         private bool PlayerIsBusted()
         {
             bool status = false;
@@ -147,7 +146,7 @@ namespace BlackJack_Server
             if (player.GetScore() == 21)
             {
                 statusMessage.Text = "YOU LOST!"; 
-                statusMessage.ForeColor = Color.Black;
+                statusMessage.ForeColor = Color.Red;
                 status = true;
             }
             return status;
@@ -159,7 +158,7 @@ namespace BlackJack_Server
             if (dealer.GetScore() == 21)
             {
                 statusMessage.Text = "YOU WON!";
-                statusMessage.ForeColor = Color.Red;
+                statusMessage.ForeColor = Color.Black;
             }
             if (dealer.GetScore() > 21)
             {
@@ -176,6 +175,7 @@ namespace BlackJack_Server
                 statusMessage.Text = "YOU LOST!";
                 statusMessage.ForeColor = Color.Red;
             }
+            drawCardBtn.Enabled = false;
             determineWinnerBtn.Enabled = false;
         }
 
@@ -208,11 +208,12 @@ namespace BlackJack_Server
             SendInstructions(2 + " " + card.Suit + " " + card.Rank);
             dealerCardCounter++;
             dealer.SetScore(CalculateScore(dealer));
-            dealerScoreLabel.Text = "Score:" + dealer.GetScore();
-            if (PlayerIsBusted() || PlayerHasReachedMaxScore())
-            {
-                determineWinnerBtn.Enabled = false;
-            }
+        }
+
+        private void determineWinnerBtn_Click(object sender, EventArgs e)
+        {
+            DetermineWinner();
+            SendInstructions("3");
         }
 
         public void ExecuteInstructions(string dateClient)
@@ -233,10 +234,11 @@ namespace BlackJack_Server
                     SendInstructions(1 + " " + card.Suit + " " + card.Rank);
                     playerCardCounter++;
                     player.SetScore(CalculateScore(player));
-                    playerScoreLabel.Text = "Score:" + player.GetScore();
                 }
                 if (PlayerIsBusted() || PlayerHasReachedMaxScore())
                 {
+                    RevealDealerCard();
+                    drawCardBtn.Enabled = false;
                     determineWinnerBtn.Enabled = false;
                 }
             }
@@ -286,12 +288,6 @@ namespace BlackJack_Server
             {
 
             }
-        }
-
-        private void determineWinnerBtn_Click(object sender, EventArgs e)
-        {
-            DetermineWinner();
-            SendInstructions("3");
         }
     }
 }

@@ -32,8 +32,6 @@
             this.drawCardBtn = new System.Windows.Forms.Button();
             this.determineWinnerBtn = new System.Windows.Forms.Button();
             this.statusMessage = new System.Windows.Forms.Label();
-            this.dealerScoreLabel = new System.Windows.Forms.Label();
-            this.playerScoreLabel = new System.Windows.Forms.Label();
             this.dealerCardImg5 = new System.Windows.Forms.PictureBox();
             this.dealerCardImg4 = new System.Windows.Forms.PictureBox();
             this.playerCardImg5 = new System.Windows.Forms.PictureBox();
@@ -94,24 +92,6 @@
             this.statusMessage.Size = new System.Drawing.Size(47, 16);
             this.statusMessage.TabIndex = 20;
             this.statusMessage.Text = "Status:";
-            // 
-            // dealerScoreLabel
-            // 
-            this.dealerScoreLabel.AutoSize = true;
-            this.dealerScoreLabel.Location = new System.Drawing.Point(616, 396);
-            this.dealerScoreLabel.Name = "dealerScoreLabel";
-            this.dealerScoreLabel.Size = new System.Drawing.Size(46, 16);
-            this.dealerScoreLabel.TabIndex = 22;
-            this.dealerScoreLabel.Text = "Score:";
-            // 
-            // playerScoreLabel
-            // 
-            this.playerScoreLabel.AutoSize = true;
-            this.playerScoreLabel.Location = new System.Drawing.Point(616, 35);
-            this.playerScoreLabel.Name = "playerScoreLabel";
-            this.playerScoreLabel.Size = new System.Drawing.Size(46, 16);
-            this.playerScoreLabel.TabIndex = 21;
-            this.playerScoreLabel.Text = "Score:";
             // 
             // dealerCardImg5
             // 
@@ -229,8 +209,6 @@
             this.Controls.Add(this.playerCardImg3);
             this.Controls.Add(this.playerCardImg2);
             this.Controls.Add(this.playerCardImg1);
-            this.Controls.Add(this.dealerScoreLabel);
-            this.Controls.Add(this.playerScoreLabel);
             this.Controls.Add(this.statusMessage);
             this.Controls.Add(this.determineWinnerBtn);
             this.Controls.Add(this.drawCardBtn);
@@ -257,8 +235,6 @@
         private System.Windows.Forms.Button drawCardBtn;
         private System.Windows.Forms.Button determineWinnerBtn;
         private System.Windows.Forms.Label statusMessage;
-        private System.Windows.Forms.Label dealerScoreLabel;
-        private System.Windows.Forms.Label playerScoreLabel;
         private System.Windows.Forms.PictureBox dealerCardImg5;
         private System.Windows.Forms.PictureBox dealerCardImg4;
         private System.Windows.Forms.PictureBox playerCardImg5;

@@ -140,7 +140,7 @@ namespace BlackJack_Client
             if (player.GetScore() == 21)
             {
                 statusMessage.Text = "YOU WON!";
-                statusMessage.ForeColor = Color.Red;
+                statusMessage.ForeColor = Color.Black;
                 status = true;
             }
             return status;
@@ -157,7 +157,7 @@ namespace BlackJack_Client
             if (dealer.GetScore() == 21)
             {
                 statusMessage.Text = "YOU LOST!";
-                statusMessage.ForeColor = Color.Black;
+                statusMessage.ForeColor = Color.Red;
             }
             if (player.GetScore() > dealer.GetScore())
             {
@@ -169,6 +169,7 @@ namespace BlackJack_Client
                 statusMessage.Text = "YOU LOST!";
                 statusMessage.ForeColor = Color.Red;
             }
+            drawCardBtn.Enabled = false;
             determineWinnerBtn.Enabled = false;
         }
 
@@ -206,26 +207,27 @@ namespace BlackJack_Client
             }
         }
 
-        private void Client_Window_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void drawCard_Click(object sender, EventArgs e)
         {
-            SendInstructions("0"); // 0 0 este comanda care cere o carte la server
+            SendInstructions("0"); // 0 este comanda care cere o carte la server
+        }
+
+        private void determineWinnerBtn_Click(object sender, EventArgs e)
+        {
+            DetermineWinner();
+            SendInstructions("3");
         }
 
         public void ExecuteInstructions(string dateServer)
         {
             string[] parts = dateServer.Split(' ');
-            Card card = new Card(Convert.ToInt32(parts[1]), Convert.ToInt32(parts[2]));
             if (Convert.ToInt32(parts[0]) == 3)
             {
                 DetermineWinner();
             }
             else
             {
+                Card card = new Card(Convert.ToInt32(parts[1]), Convert.ToInt32(parts[2]));
                 if (Convert.ToInt32(parts[0]) == 1) //primire carte pentru player
                 {
                     player.AddCard(card);
@@ -234,7 +236,12 @@ namespace BlackJack_Client
                     playerPictureBoxes[playerCardCounter].BringToFront();
                     playerCardCounter++;
                     player.SetScore(CalculateScore(player));
-                    playerScoreLabel.Text = "Score:" + player.GetScore();
+                    if (PlayerIsBusted() || PlayerHasReachedMaxScore())
+                    {
+                        RevealDealerCard();
+                        drawCardBtn.Enabled = false;
+                        determineWinnerBtn.Enabled = false;
+                    }
                 }
                 else if (Convert.ToInt32(parts[0]) == 2) //primire carte pentru dealer
                 {
@@ -252,11 +259,6 @@ namespace BlackJack_Client
                     dealerPictureBoxes[dealerCardCounter].BringToFront();
                     dealerCardCounter++;
                     dealer.SetScore(CalculateScore(dealer));
-                    dealerScoreLabel.Text = "Score:" + dealer.GetScore();
-                }
-                if (PlayerIsBusted() || PlayerHasReachedMaxScore())
-                {
-                    determineWinnerBtn.Enabled = false;
                 }
             }
         }
@@ -304,12 +306,6 @@ namespace BlackJack_Client
             StreamWriter scriere = new StreamWriter(clientStream);
             scriere.AutoFlush = true; // enable automatic flushing
             scriere.WriteLine("#Gata");
-        }
-
-        private void determineWinnerBtn_Click(object sender, EventArgs e)
-        {
-            DetermineWinner();
-            SendInstructions("3");
         }
     }
 }
