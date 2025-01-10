@@ -160,12 +160,12 @@ namespace BlackJack_Server
                 statusMessage.Text = "YOU WON!";
                 statusMessage.ForeColor = Color.Black;
             }
-            if (dealer.GetScore() > 21)
+            else if (dealer.GetScore() > 21)
             {
                 statusMessage.Text = "BUSTED!";
                 statusMessage.ForeColor = Color.Red;
             }
-            if (dealer.GetScore() > player.GetScore())
+            else if (dealer.GetScore() > player.GetScore())
             {
                 statusMessage.Text = "YOU WON!";
                 statusMessage.ForeColor = Color.Black;

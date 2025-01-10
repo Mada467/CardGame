@@ -154,12 +154,12 @@ namespace BlackJack_Client
                 statusMessage.Text = "YOU WON!";
                 statusMessage.ForeColor = Color.Black;
             }
-            if (dealer.GetScore() == 21)
+            else if (dealer.GetScore() == 21)
             {
                 statusMessage.Text = "YOU LOST!";
                 statusMessage.ForeColor = Color.Red;
             }
-            if (player.GetScore() > dealer.GetScore())
+            else if (player.GetScore() > dealer.GetScore())
             {
                 statusMessage.Text = "YOU WON!";
                 statusMessage.ForeColor = Color.Black;
@@ -305,7 +305,7 @@ namespace BlackJack_Client
             t.Abort();
             StreamWriter scriere = new StreamWriter(clientStream);
             scriere.AutoFlush = true; // enable automatic flushing
-            scriere.WriteLine("#Gata");
+            //scriere.WriteLine("#Gata");
         }
     }
 }
